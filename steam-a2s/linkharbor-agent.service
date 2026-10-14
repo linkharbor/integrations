@@ -1,0 +1,19 @@
+# systemd unit — copy to /etc/systemd/system/linkharbor-agent.service,
+# put the two secrets into /etc/linkharbor-agent.env (chmod 600):
+#   LH_INGEST_URL=https://api.linkharbor.com/v1/ingest/123
+#   LH_INGEST_SECRET=…
+[Unit]
+Description=LinkHarbor Steam/Source server agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=/etc/linkharbor-agent.env
+ExecStart=/usr/bin/python3 /opt/linkharbor-integrations/steam-a2s/agent.py --host 127.0.0.1 --port 27015 --name "My Server" --address "play.example.com:27015" --url "https://discord.gg/xyz"
+Restart=always
+RestartSec=10
+User=nobody
+
+[Install]
+WantedBy=multi-user.target

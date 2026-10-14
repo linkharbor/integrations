@@ -1,0 +1,47 @@
+# LinkHarbor for Paper — configuration
+#
+# 1. In the LinkHarbor dashboard connect "Custom (API)" (Workspace → Integrations),
+#    give it a name, and copy the Ingest URL and the Secret.
+# 2. Paste both below, restart the server (or run /linkharbor reload).
+# 3. Add an "Integration" block to your bio page and pick this integration —
+#    it renders as a live game-server card.
+# 4. Optional: create push rules for the events listed under `events`
+#    (Workspace → Integrations → Push rules), e.g. a batch rule
+#    "{count} players joined" with a 10-minute window.
+
+ingest_url: "https://api.linkharbor.com/v1/ingest/0"
+ingest_secret: ""
+
+# What the widget shows. `name` falls back to the server MOTD (first line).
+server:
+  name: ""
+  # Address shown on the card (copyable). Leave empty to hide it.
+  address: "play.example.com"
+  # Link behind the card's button, e.g. your website or a Discord invite.
+  # Without a URL the card has no button.
+  url: ""
+  # Button label (max 40 chars).
+  cta: "Join server"
+  # Optional banner image for the large layout (https URL).
+  image_url: ""
+  # Optional one-liner under the title (max 200 chars).
+  description: ""
+  # Game label shown as an eyebrow in the large layout.
+  game: "Minecraft"
+
+# Which events are sent (each one can drive a push rule in the dashboard).
+events:
+  player_joined: true     # event "player.joined", data.player = name
+  player_left: true       # event "player.left",   data.player = name
+  server_started: true    # event "server.started" (on plugin enable)
+  server_stopped: true    # event "server.stopped" (on plugin disable; state.online = false)
+
+# Include the names of online players in the widget state (shown as chips).
+send_player_names: true
+
+# Send the current state without an event every N minutes so the card never
+# goes stale (0 = off). Joins/leaves always send immediately.
+heartbeat_minutes: 10
+
+# Log every request and response to the console.
+debug: false

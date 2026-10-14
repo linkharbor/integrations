@@ -1,0 +1,16 @@
+name: LinkHarbor
+version: '${project.version}'
+main: com.linkharbor.minecraft.LinkHarborPlugin
+api-version: '1.20'
+description: Pushes player joins/leaves and the live server state to your LinkHarbor bio page.
+author: LinkHarbor
+website: https://linkharbor.com
+commands:
+  linkharbor:
+    description: LinkHarbor plugin commands (reload, status, push)
+    usage: /linkharbor <reload|status|push>
+    permission: linkharbor.admin
+permissions:
+  linkharbor.admin:
+    description: Manage the LinkHarbor plugin
+    default: op
