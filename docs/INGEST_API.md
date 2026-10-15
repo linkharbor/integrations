@@ -6,14 +6,14 @@ secret per integration, plain JSON.
 ## Connect
 
 Dashboard → **Workspace → Integrations → Custom (API)** → name it → copy
-**Ingest URL** (`https://api.linkharbor.com/v1/ingest/{id}`) and **Secret**
+**Ingest URL** (`https://dock.at-harbor.com/v1/ingest/{id}`) and **Secret**
 (64 hex characters). Both are shown again in the integration's detail panel.
 Disconnecting and reconnecting issues a new secret.
 
 ## Request
 
 ```http
-POST https://api.linkharbor.com/v1/ingest/{id}
+POST https://dock.at-harbor.com/v1/ingest/{id}
 Authorization: Bearer <secret>          # or: X-LinkHarbor-Secret: <secret>
 Content-Type: application/json
 ```

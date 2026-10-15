@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 # Minimal examples for the LinkHarbor ingest endpoint.
-#   export LH_INGEST_URL="https://api.linkharbor.com/v1/ingest/123"
+#   export LH_INGEST_URL="https://dock.at-harbor.com/v1/ingest/123"
 #   export LH_INGEST_SECRET="…"
 set -eu
 : "${LH_INGEST_URL:?set LH_INGEST_URL}"
