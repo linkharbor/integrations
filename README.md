@@ -12,10 +12,10 @@ installer or single-file agent:
 
 | Repo | Game / platform | How it runs | Events |
 |---|---|---|---|
-| [linkharbor-minecraft](https://github.com/linkharbor/linkharbor-minecraft) | Minecraft Java (Paper, Purpur, …) | plugin jar in `plugins/` | joins/leaves with names, start/stop |
-| [linkharbor-minecraft-bedrock](https://github.com/linkharbor/linkharbor-minecraft-bedrock) | Minecraft Bedrock, plugin-free Java | Python agent, pings from outside | online/offline, player count |
-| [linkharbor-steam](https://github.com/linkharbor/linkharbor-steam) | Rust, ARK, Valheim, Palworld, CS2, Garry's Mod, TF2, Satisfactory, 7 Days to Die, DayZ, … (A2S) | Python agent | online/offline, joins/leaves |
-| [linkharbor-fivem](https://github.com/linkharbor/linkharbor-fivem) | FiveM (GTA V), RedM (RDR2) | Python agent, HTTP endpoints | online/offline, joins/leaves |
+| [integration-minecraft](https://github.com/linkharbor/integration-minecraft) | Minecraft Java (Paper, Purpur, …) | plugin jar in `plugins/` | joins/leaves with names, start/stop |
+| [integration-minecraft-bedrock](https://github.com/linkharbor/integration-minecraft-bedrock) | Minecraft Bedrock, plugin-free Java | Python agent, pings from outside | online/offline, player count |
+| [integration-steam](https://github.com/linkharbor/integration-steam) | Rust, ARK, Valheim, Palworld, CS2, Garry's Mod, TF2, Satisfactory, 7 Days to Die, DayZ, … (A2S) | Python agent | online/offline, joins/leaves |
+| [integration-fivem](https://github.com/linkharbor/integration-fivem) | FiveM (GTA V), RedM (RDR2) | Python agent, HTTP endpoints | online/offline, joins/leaves |
 
 Planned: Discord bot (member joins, voice activity → status card), Terraria
 (TShock), Factorio (RCON). Want another game? Open an issue here, or send a
@@ -65,7 +65,7 @@ examples: [examples/curl.sh](examples/curl.sh).
 
 ## Contributing
 
-New connectors live in their own repo (`linkharbor-<game>`), MIT-licensed,
+New connectors live in their own repo (`integration-<game>`), MIT-licensed,
 dependency-light, never logging the secret, with a README that lists the
 events they send so creators can build push rules. Open an issue here first
 if you plan something bigger; we are happy to move a good connector under
