@@ -1,21 +1,25 @@
 # LinkHarbor Integrations
 
-Ready-made connectors that push live data from your tools and games to your
-[LinkHarbor](https://linkharbor.com) bio page — a live **game-server card** or
-**status card** for your visitors, and **push notifications** for your
-followers ("3 players joined", "the shop is open").
+Connect your tools and games to your [LinkHarbor](https://linkharbor.com) bio
+page: a live **game-server card** or **status card** for your visitors, and
+**push notifications** for your followers ("3 players joined", "the shop is
+open").
 
-Everything here talks to one small, open HTTP endpoint — the LinkHarbor
-**Custom (API)** integration. If your tool isn't listed, the contract in
-[docs/INGEST_API.md](docs/INGEST_API.md) is all you need: one `POST` with a
-JSON body.
+Every connector talks to one small, open HTTP endpoint — the LinkHarbor
+**Custom (API)** integration — documented in
+[docs/INGEST_API.md](docs/INGEST_API.md). One repo per game, each with its own
+installer or single-file agent:
 
-| Connector | What it does | Status |
-|---|---|---|
-| [`minecraft-paper/`](minecraft-paper/) | Paper/Spigot plugin: player joins/leaves as events, live player list, version and address on the card | ✅ ready |
-| [`steam-a2s/`](steam-a2s/) | Python agent for any Source-engine server (CS2, Rust, Valheim, ARK, Garry's Mod, TF2, Palworld, …): polls A2S, sends joins/leaves and the live state | ✅ ready |
-| [`examples/`](examples/) | `curl` one-liners: status card, game-server card, plain events | ✅ |
-| Discord bot | member joins / voice activity → status card | planned |
+| Repo | Game / platform | How it runs | Events |
+|---|---|---|---|
+| [linkharbor-minecraft](https://github.com/linkharbor/linkharbor-minecraft) | Minecraft Java (Paper, Purpur, …) | plugin jar in `plugins/` | joins/leaves with names, start/stop |
+| [linkharbor-minecraft-bedrock](https://github.com/linkharbor/linkharbor-minecraft-bedrock) | Minecraft Bedrock, plugin-free Java | Python agent, pings from outside | online/offline, player count |
+| [linkharbor-steam](https://github.com/linkharbor/linkharbor-steam) | Rust, ARK, Valheim, Palworld, CS2, Garry's Mod, TF2, Satisfactory, 7 Days to Die, DayZ, … (A2S) | Python agent | online/offline, joins/leaves |
+| [linkharbor-fivem](https://github.com/linkharbor/linkharbor-fivem) | FiveM (GTA V), RedM (RDR2) | Python agent, HTTP endpoints | online/offline, joins/leaves |
+
+Planned: Discord bot (member joins, voice activity → status card), Terraria
+(TShock), Factorio (RCON). Want another game? Open an issue here, or send a
+pull request with a new repo link — see [Contributing](#contributing).
 
 ## How it works
 
@@ -24,8 +28,8 @@ your tool ──POST /v1/ingest/{id}──▶ LinkHarbor API ──▶ widget on
             Authorization: Bearer <secret>          └─▶ push rules → notifications to followers
 ```
 
-1. In the LinkHarbor dashboard open **Workspace → Integrations → Custom (API)**,
-   give it a name and copy the **Ingest URL** and **Secret**.
+1. Dashboard → **Workspace → Integrations → Custom (API)**, give it a name,
+   copy the **Ingest URL** and **Secret**.
 2. Put both into the connector's configuration (see its README).
 3. Add an **Integration** block to your page and pick the integration — the
    card renders as soon as the first state arrives.
@@ -56,13 +60,16 @@ Integrations are available on LinkHarbor Pro and Agency plans.
 * `state` — replaces the widget. `type` is `game_server` or `status`. Optional.
 * At least one of `event` / `state` is required.
 
-Full reference: [docs/INGEST_API.md](docs/INGEST_API.md).
+Full reference: [docs/INGEST_API.md](docs/INGEST_API.md). Copy-paste
+examples: [examples/curl.sh](examples/curl.sh).
 
 ## Contributing
 
-Connectors for other games and tools are welcome — keep them dependency-light,
-never log the secret, and document the events they send so creators can build
-push rules for them. Open an issue first if you plan something bigger.
+New connectors live in their own repo (`linkharbor-<game>`), MIT-licensed,
+dependency-light, never logging the secret, with a README that lists the
+events they send so creators can build push rules. Open an issue here first
+if you plan something bigger; we are happy to move a good connector under
+this organisation.
 
 ## License
 

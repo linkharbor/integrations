@@ -1,13 +1,4 @@
-# Maven
-minecraft-paper/target/
-# Python
-__pycache__/
-*.pyc
-.venv/
-# Secrets — never commit ingest secrets
-*.env
-linkharbor-agent.env
-# IDE / OS
 .idea/
 .vscode/
 .DS_Store
+*.env
